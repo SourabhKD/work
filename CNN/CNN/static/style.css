@@ -1,0 +1,352 @@
+:root {
+    --primary-color: #5d78ff;
+    --human-color: #4caf50;
+    --ai-color: #ff5252;
+    --text-color: #2d3748;
+    --light-bg: #f8fafc;
+    --card-bg: #ffffff;
+    --border-color: #e2e8f0;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --error-color: #ff4444;
+    --success-color: #00c851;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', 'Roboto', sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--light-bg);
+    padding: 0;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    background: linear-gradient(135deg, var(--primary-color), #6c5ce7);
+    color: white;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    box-shadow: 0 4px 6px var(--shadow-color);
+}
+
+.header-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    font-weight: 300;
+}
+
+.main-content {
+    flex: 1;
+    padding: 2rem 1.5rem;
+}
+
+.input-section {
+    margin-bottom: 2rem;
+}
+
+.analysis-form {
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px var(--shadow-color);
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 1rem;
+    resize: vertical;
+    min-height: 200px;
+    transition: all 0.3s ease;
+    line-height: 1.6;
+}
+
+textarea:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(93, 120, 255, 0.2);
+}
+
+.form-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.word-count {
+    color: #64748b;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.analyze-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.analyze-btn:hover {
+    background-color: #4d68e6;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px var(--shadow-color);
+}
+
+.error-message {
+    background-color: #ffeeee;
+    color: var(--error-color);
+    padding: 1rem;
+    border-radius: 8px;
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-left: 4px solid var(--error-color);
+}
+
+.results-section {
+    margin-top: 2rem;
+}
+
+.results-section h2 {
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.result-card {
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px var(--shadow-color);
+    margin-bottom: 2rem;
+    border-top: 4px solid var(--primary-color);
+}
+
+.result-card.human {
+    border-top-color: var(--human-color);
+}
+
+.result-card.ai {
+    border-top-color: var(--ai-color);
+}
+
+.prediction, .confidence {
+    margin: 1rem 0;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.label {
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.value {
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.result-card.human .value {
+    color: var(--human-color);
+    background-color: rgba(76, 175, 80, 0.1);
+}
+
+.result-card.ai .value {
+    color: var(--ai-color);
+    background-color: rgba(255, 82, 82, 0.1);
+}
+
+.probability-container {
+    height: 40px;
+    background-color: #f1f5f9;
+    border-radius: 20px;
+    margin: 2rem 0;
+    overflow: hidden;
+    display: flex;
+    position: relative;
+}
+
+.probability {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    transition: width 0.5s ease;
+    position: relative;
+}
+
+.probability.human {
+    background: linear-gradient(to right, var(--human-color), #66bb6a);
+    justify-content: flex-start;
+}
+
+.probability.ai {
+    background: linear-gradient(to right, #ff6b6b, var(--ai-color));
+    justify-content: flex-end;
+}
+
+.prob-label {
+    color: white;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 0 1rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    position: absolute;
+}
+
+.probability.human .prob-label {
+    left: 10px;
+}
+
+.probability.ai .prob-label {
+    right: 10px;
+}
+
+.model-details {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.model-details h3 {
+    margin-bottom: 1rem;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.model-details p {
+    margin-bottom: 1rem;
+    color: #4a5568;
+    line-height: 1.7;
+}
+
+.footer {
+    background-color: var(--card-bg);
+    padding: 2rem 1.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.info-box {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.info-box h3 {
+    margin-bottom: 1rem;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.info-box ul {
+    list-style-type: none;
+}
+
+.info-box li {
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    color: #4a5568;
+}
+
+.footer-note {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    color: #64748b;
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+    
+    .header, .main-content, .footer {
+        padding: 1.5rem 1rem;
+    }
+    
+    .form-footer {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+    
+    .analyze-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .prediction, .confidence {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+}

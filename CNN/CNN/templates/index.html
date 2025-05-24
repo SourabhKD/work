@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CNN AI Text Detector</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <h1><i class="fas fa-robot"></i> AI Text Detector</h1>
+                <p class="subtitle">Using Convolutional Neural Network (CNN) Technology</p>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <section class="input-section">
+                <form method="POST" class="analysis-form">
+                    <div class="form-group">
+                        <label for="text">
+                            <i class="fas fa-align-left"></i> Enter your text (minimum 50 words):
+                        </label>
+                        <textarea id="text" name="text" rows="10" required>{{ text if text else '' }}</textarea>
+                        <div class="form-footer">
+                            <div class="word-count">
+                                <i class="fas fa-wordpress"></i> Word count: {{ result.word_count if result else '0' }}
+                            </div>
+                            <button type="submit" class="analyze-btn">
+                                <i class="fas fa-search"></i> Analyze Text
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+                {% if error %}
+                <div class="error-message">
+                    <i class="fas fa-exclamation-circle"></i> {{ error }}
+                </div>
+                {% endif %}
+            </section>
+
+            {% if result %}
+            <section class="results-section">
+                <h2><i class="fas fa-chart-bar"></i> Analysis Results</h2>
+                
+                <div class="result-card {{ 'ai' if result.prediction == 'AI-generated' else 'human' }}">
+                    <div class="prediction">
+                        <span class="label">Prediction:</span>
+                        <span class="value">
+                            {{ result.prediction }}
+                            {% if result.prediction == 'AI-generated' %}
+                                <i class="fas fa-robot"></i>
+                            {% else %}
+                                <i class="fas fa-user"></i>
+                            {% endif %}
+                        </span>
+                    </div>
+                    
+                    <div class="confidence">
+                        <span class="label">Confidence:</span>
+                        <span class="value">{{ result.confidence }}%</span>
+                    </div>
+                    
+                    <div class="probability-container">
+                        <div class="probability human" style="width: {{ result.human_prob }}%">
+                            <span class="prob-label">Human: {{ result.human_prob }}%</span>
+                        </div>
+                        <div class="probability ai" style="width: {{ result.ai_prob }}%">
+                            <span class="prob-label">AI: {{ result.ai_prob }}%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="model-details">
+                        <h3><i class="fas fa-microchip"></i> Model Information</h3>
+                        <p>This detector uses a 1D Convolutional Neural Network (CNN) trained on human-written and AI-generated text samples.</p>
+                        <p>CNNs are particularly effective at detecting local patterns in text that may indicate AI generation.</p>
+                    </div>
+                </div>
+            </section>
+            {% endif %}
+        </main>
+
+        <footer class="footer">
+            <div class="info-box">
+                <h3><i class="fas fa-lightbulb"></i> Tips for Best Results</h3>
+                <ul>
+                    <li><i class="fas fa-check-circle"></i> Provide complete paragraphs (100+ words recommended)</li>
+                    <li><i class="fas fa-check-circle"></i> Avoid very short or fragmented text</li>
+                    <li><i class="fas fa-check-circle"></i> Results with confidence below 60% should be considered uncertain</li>
+                    <li><i class="fas fa-check-circle"></i> CNN models excel at detecting local patterns in text</li>
+                </ul>
+            </div>
+            <div class="footer-note">
+                <p>Powered by TensorFlow CNN | Accuracy: ~92% on test data</p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
