@@ -1,0 +1,255 @@
+:root {
+    --primary-color: #3498db;
+    --human-color: #2ecc71;
+    --ai-color: #e74c3c;
+    --text-color: #2c3e50;
+    --light-gray: #ecf0f1;
+    --medium-gray: #bdc3c7;
+    --dark-gray: #7f8c8d;
+    --error-color: #e74c3c;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: #f5f7fa;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+header {
+    padding: 25px;
+    background: linear-gradient(135deg, var(--primary-color), #2980b9);
+    color: white;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.2rem;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+main {
+    padding: 25px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+textarea {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid var(--light-gray);
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 1rem;
+    resize: vertical;
+    min-height: 200px;
+    transition: all 0.3s ease;
+}
+
+textarea:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+
+.word-count {
+    text-align: right;
+    color: var(--dark-gray);
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 1.1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+button:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+}
+
+.error {
+    color: white;
+    background-color: var(--error-color);
+    padding: 15px;
+    border-radius: 6px;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.result-container {
+    margin-top: 30px;
+}
+
+.result-container h2 {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--light-gray);
+}
+
+.result-card {
+    background-color: var(--light-gray);
+    padding: 25px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.prediction, .confidence {
+    margin: 15px 0;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+}
+
+.label {
+    font-weight: 600;
+    margin-right: 15px;
+    min-width: 120px;
+}
+
+.value {
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+.value.human {
+    background-color: rgba(46, 204, 113, 0.2);
+    color: var(--human-color);
+}
+
+.value.ai {
+    background-color: rgba(231, 76, 60, 0.2);
+    color: var(--ai-color);
+}
+
+.probability-meter {
+    height: 40px;
+    background-color: white;
+    border-radius: 20px;
+    margin: 25px 0;
+    overflow: hidden;
+    display: flex;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.probability {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: width 0.5s ease;
+}
+
+.probability.human {
+    background: linear-gradient(to right, var(--human-color), #27ae60);
+}
+
+.probability.ai {
+    background: linear-gradient(to right, var(--ai-color), #c0392b);
+}
+
+.model-info {
+    margin-top: 25px;
+    padding-top: 15px;
+    border-top: 1px solid var(--medium-gray);
+}
+
+.model-info h3 {
+    margin-bottom: 10px;
+}
+
+.model-info p {
+    margin-bottom: 10px;
+    line-height: 1.7;
+}
+
+footer {
+    padding: 20px;
+    background-color: var(--light-gray);
+}
+
+.info-box {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.info-box h3 {
+    margin-bottom: 10px;
+    color: var(--text-color);
+}
+
+.info-box ul {
+    padding-left: 20px;
+}
+
+.info-box li {
+    margin-bottom: 8px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        border-radius: 0;
+    }
+    
+    header {
+        padding: 20px 15px;
+    }
+    
+    main {
+        padding: 20px 15px;
+    }
+    
+    .prediction, .confidence {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .label {
+        margin-bottom: 5px;
+    }
+}

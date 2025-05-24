@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LSTM AI Text Detector</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>AI Text Detector</h1>
+            <p class="subtitle">Using LSTM Neural Network for Detection</p>
+        </header>
+
+        <main>
+            <form method="POST">
+                <div class="form-group">
+                    <label for="text">Enter text to analyze (min 50 words):</label>
+                    <textarea id="text" name="text" rows="10" required>{{ text if text else '' }}</textarea>
+                    <div class="word-count">
+                        Word count: {{ result.word_count if result else '0' }}
+                    </div>
+                </div>
+                <button type="submit">Analyze Text</button>
+            </form>
+
+            {% if error %}
+                <div class="error">{{ error }}</div>
+            {% endif %}
+
+            {% if result %}
+            <div class="result-container">
+                <h2>Analysis Results</h2>
+                
+                <div class="result-card">
+                    <div class="prediction">
+                        <span class="label">Prediction:</span>
+                        <span class="value {{ 'ai' if result.prediction == 'AI-generated' else 'human' }}">
+                            {{ result.prediction }}
+                        </span>
+                    </div>
+                    
+                    <div class="confidence">
+                        <span class="label">Confidence:</span>
+                        <span class="value">{{ result.confidence }}%</span>
+                    </div>
+                    
+                    <div class="probability-meter">
+                        <div class="probability human" style="width: {{ result.human_prob }}%">
+                            <span>Human: {{ result.human_prob }}%</span>
+                        </div>
+                        <div class="probability ai" style="width: {{ result.ai_prob }}%">
+                            <span>AI: {{ result.ai_prob }}%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="model-info">
+                        <h3>About This Model</h3>
+                        <p>This detector uses an LSTM (Long Short-Term Memory) neural network trained on human-written and AI-generated text samples.</p>
+                        <p>The model analyzes patterns in your text to determine its likely origin with a confidence score.</p>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </main>
+
+        <footer>
+            <div class="info-box">
+                <h3>Tips for Best Results:</h3>
+                <ul>
+                    <li>Provide complete paragraphs (100+ words for better accuracy)</li>
+                    <li>Avoid very short or fragmented text</li>
+                    <li>Results with confidence below 60% should be considered uncertain</li>
+                </ul>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
